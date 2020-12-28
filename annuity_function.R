@@ -82,7 +82,7 @@ whole_life_annuity <- function(Table, EntryAge, Omega, Amount, InterestRate,
         px <- c(1, 1 - qx)
         
         tpx <- cumprod(x = px)
-        äx <- cumsum(x = tpx * v^seq(from = 0, to = Omega - EntryAge)) - (m - 1) / (2 * m) ##### * (1 - tpx * v ^ seq(from = 0, to = Omega - EntryAge))
+        aex <- cumsum(x = tpx * v^seq(from = 0, to = Omega - EntryAge)) - (m - 1) / (2 * m) ##### * (1 - tpx * v ^ seq(from = 0, to = Omega - EntryAge))
         
 
         Hv <- if (EntryAge > 40) {
@@ -91,7 +91,7 @@ whole_life_annuity <- function(Table, EntryAge, Omega, Amount, InterestRate,
                 (EntryAge + 40) / 80
         }
 
-        return(rev(x = äx)[1] * Amount * (1 + expense_rate) * Hv)
+        return(rev(x = aex)[1] * Amount * (1 + expense_rate) * Hv)
 }
 
 
@@ -120,8 +120,6 @@ whole_life_annuity_cashflow <- function(Table, EntryAge, Amount,
 
 }
 
-
-
 # Table <- "GRMF_09"
 # EntryAge <- 63
 # Omega <- get_Omega(Table, directory)
@@ -137,6 +135,7 @@ whole_life_annuity_cashflow <- function(Table, EntryAge, Amount,
 # expenses_included <- FALSE
 # path <- directory
 # Table <- "ZLKR14GT_II"
+
 directory <- file.path("C:", "Users", "Julia", "Documents", "R_files")
 
 arguments <- list(Table = "GRMF_09", EntryAge = 63L, InterestRate = 0.0175,
