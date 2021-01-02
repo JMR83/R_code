@@ -1,7 +1,5 @@
 
-
 rm(list = ls())
-
 
 get_Omega <- function(Table, path) {
         
@@ -19,16 +17,15 @@ get_Omega <- function(Table, path) {
 }
 
 
-
 whole_life_annuity <- function(Table, EntryAge, Omega, Amount, InterestRate,
                                expense_rate, Gender, m, t_0, t, current_year, 
                                GenerationTable, expenses_included, path) {
         
         Input <- paste0(path, "/", Table, ".csv")
-        BiometricTable <- read.csv2(Input, skip = 0, 
-                                    header = TRUE, 
-                                    sep = ";", 
-                                    stringsAsFactors = FALSE,                                                 
+        BiometricTable <- read.csv2(Input, skip = 0,
+                                    header = TRUE,
+                                    sep = ";",
+                                    stringsAsFactors = FALSE,
                                     dec = ".")
         
         
@@ -39,7 +36,7 @@ whole_life_annuity <- function(Table, EntryAge, Omega, Amount, InterestRate,
                                   skip = 0, 
                                   header = TRUE, 
                                   sep = ";", 
-                                  stringsAsFactors = FALSE,                                                 
+                                  stringsAsFactors = FALSE,
                                   dec = ".")
                 Menthonnex_faktoren <- TRUE
         }
@@ -84,13 +81,13 @@ whole_life_annuity <- function(Table, EntryAge, Omega, Amount, InterestRate,
         tpx <- cumprod(x = px)
         aex <- cumsum(x = tpx * v^seq(from = 0, to = Omega - EntryAge)) - (m - 1) / (2 * m) ##### * (1 - tpx * v ^ seq(from = 0, to = Omega - EntryAge))
         
-
+        
         Hv <- if (EntryAge > 40) {
                 1
         } else {
                 (EntryAge + 40) / 80
         }
-
+        
         return(rev(x = aex)[1] * Amount * (1 + expense_rate) * Hv)
 }
 
@@ -117,7 +114,7 @@ whole_life_annuity_cashflow <- function(Table, EntryAge, Amount,
         write.table(x = data.frame(EntryAge:get_Omega(Table, path), present_value),
                     file = file.path(directory, "present_value.csv"),
                     sep = ";", col.names = c("age", "present_value"))
-
+        
 }
 
 # Table <- "GRMF_09"
