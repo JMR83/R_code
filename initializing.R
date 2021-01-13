@@ -1,7 +1,7 @@
 rm(list = ls())
 
 #### Settings ----
-options(continue = "  ", digits = 7, max.print = 20, 
+options(continue = "  ", digits = 7, max.print = 50, 
         prompt = "R> ", stringsAsFactors = FALSE, warn = 0)
 
 #### load Packages ----

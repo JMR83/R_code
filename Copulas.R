@@ -1,28 +1,8 @@
-rm(list = ls())
-
-#### Settings ----
-options(continue = "  ", digits = 7, max.print = 20, 
-        prompt = "R> ", stringsAsFactors = FALSE, warn = 0)
-
-#### load Packages ----
-pkgs <- c("compiler", "ChainLadder", "DBI", "doParallel", 
-          "dplyr", "foreach", "iterators", "lattice",
-          "lubridate", "microbenchmark", "odbc", "parallel", 
-          "purrr", "RODBC", "testthat", "tidyverse")
-
-lapply(pkgs, FUN = library, character.only = TRUE)
-
-#### Assigning lubridate functions in order to avoid conflict with data.table package
-
-day <- lubridate::day
-month <- lubridate::month
-year <- lubridate::year
-rename <- dplyr::rename
-
-
+source(file.path("C:", "Users", "julia", "Documents", 
+                 "GitHub", "R_code", "initializing.R"))
 
 rv <- runif(10000)
-rho <- 0.3
+rho <- 0.8
 
 y <- qnorm(rv) %>% matrix(nrow = length(rv) / 2, ncol = 2) %>% 
     as.data.frame()
@@ -41,11 +21,15 @@ c2 <- -log(1 - x[, 2])
 
 c <- data.frame(c1, c2)
 
+ggplot2::qplot(x = x1, y = x2, col = I("darkblue"))
+ggplot2::qplot(x2, geom = 'histogram',
+               binwidth = 0.08,
+               fill = I("green"), 
+               col = I("blue"))
+# plot(x1, x2)
+# 
+# ggplot2::qplot(x = c1, y = c2)
+# plot(c1, c2)
 
-ggplot2::qplot(x = c1, y = c2)
-plot(c1, c2)
-
-ggplot2::qplot(x = x1, y = x2)
-plot(x1, x2)
 
 
