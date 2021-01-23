@@ -8,7 +8,7 @@ options(continue = "  ", digits = 7, max.print = 50,
 pkgs <- c("compiler", "ChainLadder", "DBI", "doParallel", 
           "dplyr", "foreach", "iterators", "lattice",
           "lubridate", "microbenchmark", "odbc", "parallel", 
-          "purrr", "RODBC", "testthat", "tidyverse")
+          "purrr", "quantmod", "testthat", "tidyverse")
 
 lapply(pkgs, FUN = library, character.only = TRUE)
 
